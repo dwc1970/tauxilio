@@ -1,6 +1,6 @@
 export const TAUXILIO_CONFIG = {
     supabaseUrl: 'https://mpezhcqiwjbbmnpksyou.supabase.co',
-    supabaseKey: 'sb_publishable_nspbW2Thzb7pVDmBkVKrOw_j7K8n1kn',
+    supabaseKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1wZXpoY3Fpd2piYm1ucGtzeW91Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQzMzU3MTQsImV4cCI6MjEwOTkxMTcxNH0.lJJlSDsxb9dam1TGfpczy6SA-9B1HVgDVuz718iqzXk',
     tableName: 'perfil',
     bucketName: 'fotos',
     localStorageKey: 'tauxilio_profiles_v1',
