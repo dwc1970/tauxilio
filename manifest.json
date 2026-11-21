@@ -1,0 +1,22 @@
+{
+    "name": "Tauxilio - Identificación QR de Emergencia",
+    "short_name": "Tauxilio",
+    "start_url": "./",
+    "scope": "./",
+    "display": "standalone",
+    "background_color": "#0f172a",
+    "theme_color": "#dc2626",
+    "description": "Aplicación web de identificación rápida mediante código QR para situaciones de emergencia de personas y mascotas.",
+    "icons": [
+        {
+            "src": "img/ayudame.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "img/ayudame.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

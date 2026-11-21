@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tauxilio - Identificación QR de Emergencia</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#dc2626">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="top-header" id="top-header">
+        <div class="top-header-inner">
+            <div class="brand-box" id="brand-home">
+                <img src="img/ayudame.png" alt="Tauxilio" class="brand-logo" onerror="this.style.display='none'">
+                <div>
+                    <div class="brand-title">Tauxilio</div>
+                    <div class="brand-sub">Código QR de Auxilio</div>
+                </div>
+            </div>
+
+            <nav class="nav-tabs" aria-label="Navegación principal">
+                <button type="button" class="tab-btn active" data-target="view-home">➕ Nuevo Perfil</button>
+                <button type="button" class="tab-btn" data-target="view-qr">🔲 Código QR</button>
+                <button type="button" class="tab-btn" data-target="view-preview">📱 Vista Auxilio</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <!-- INICIO -->
+        <section id="view-home" class="view-panel active">
+            <div class="card">
+                <div class="hero-intro">
+                    <img src="img/ayudame.png" alt="Tauxilio" class="hero-img" onerror="this.style.display='none'">
+                    <h1 class="hero-title">Crear Perfil de Auxilio</h1>
+                    <p class="hero-text">
+                        Genera un código QR para mostrar información clave y contactos de emergencia de forma rápida al ser escaneado.
+                    </p>
+                </div>
+
+                <div class="type-grid">
+                    <button type="button" class="type-card" id="choose-persona">
+                        <img src="img/persona.png" alt="Persona o familiar" onerror="this.style.display='none'">
+                        <div class="type-card-label">Persona / Familiar</div>
+                        <div class="type-card-sub">Datos médicos y contactos</div>
+                    </button>
+
+                    <button type="button" class="type-card" id="choose-mascota">
+                        <img src="img/mascotas.png" alt="Mascota" onerror="this.style.display='none'">
+                        <div class="type-card-label">Mascota</div>
+                        <div class="type-card-sub">Cuidados y responsable</div>
+                    </button>
+                </div>
+
+                <div class="cafecito-box">
+                    <strong>☕ Proyecto solidario sin fines de lucro</strong>
+                    <p>
+                        Esta aplicación se mantiene de forma voluntaria para asistir en emergencias a personas y mascotas. Si querés colaborar con el sostenimiento del servicio, podés aportar un cafecito.
+                    </p>
+                    <a href="https://cafecito.app/dariowaltercarrizo" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                        ☕ Colaborá con un Cafecito
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FORMULARIO PERSONA -->
+        <section id="view-form-persona" class="view-panel">
+            <div class="card" style="max-width:680px;margin:0 auto;">
+                <div class="form-header">
+                    <h2>Registrar Persona / Familiar</h2>
+                    <button type="button" class="btn btn-light btn-back-home">⬅ Volver</button>
+                </div>
+
+                <form id="form-persona" class="form-grid">
+                    <input type="hidden" id="p-id">
+                    <input type="hidden" id="p-foto-url">
+
+                    <div class="section-heading span-2">1. Datos del portador</div>
+
+                    <div class="field">
+                        <label for="p-nombre">Nombre(s) *</label>
+                        <input type="text" id="p-nombre" required placeholder="Ej: Mateo">
+                    </div>
+
+                    <div class="field">
+                        <label for="p-apellido">Apellido(s) *</label>
+                        <input type="text" id="p-apellido" required placeholder="Ej: González">
+                    </div>
+
+                    <div class="field">
+                        <label for="p-edad">Edad *</label>
+                        <input type="text" id="p-edad" required placeholder="Ej: 7 años">
+                    </div>
+
+                    <div class="field">
+                        <label for="p-condicion">Condición / Diagnóstico *</label>
+                        <input type="text" id="p-condicion" required placeholder="Ej: Autismo (TEA), alergias">
+                    </div>
+
+                    <div class="field span-2">
+                        <label for="p-direccion">Dirección de residencia *</label>
+                        <input type="text" id="p-direccion" required placeholder="Ej: Calle Principal 456, San Rafael">
+                    </div>
+
+                    <div class="field span-2">
+                        <label for="p-foto-file">Foto del portador</label>
+                        <div class="photo-box">
+                            <img id="p-foto-preview" src="" alt="Vista previa" class="photo-preview">
+                            <input type="file" id="p-foto-file" accept="image/*">
+                        </div>
+                    </div>
+
+                    <div class="section-heading span-2">2. Contacto principal</div>
+
+                    <div class="field">
+                        <label for="p-mama-nombre">Nombre y apellido *</label>
+                        <input type="text" id="p-mama-nombre" required placeholder="Ej: Laura Pérez">
+                    </div>
+
+                    <div class="field">
+                        <label for="p-mama-tel">Teléfono *</label>
+                        <input type="tel" id="p-mama-tel" required placeholder="Ej: +5492604123456">
+                    </div>
+
+                    <div class="field span-2">
+                        <label for="p-mama-foto-file">Foto del contacto principal (opcional)</label>
+                        <input type="hidden" id="p-mama-foto-url">
+                        <div class="photo-box">
+                            <img id="p-mama-foto-preview" src="" alt="Vista previa contacto principal" class="photo-preview">
+                            <input type="file" id="p-mama-foto-file" accept="image/*">
+                        </div>
+                    </div>
+
+                    <div class="section-heading span-2">3. Segundo contacto (opcional)</div>
+
+                    <div class="field">
+                        <label for="p-papa-nombre">Nombre y apellido</label>
+                        <input type="text" id="p-papa-nombre" placeholder="Ej: Carlos González">
+                    </div>
+
+                    <div class="field">
+                        <label for="p-papa-tel">Teléfono</label>
+                        <input type="tel" id="p-papa-tel" placeholder="Ej: +5492604654321">
+                    </div>
+
+                    <div class="field span-2">
+                        <label for="p-papa-foto-file">Foto del segundo contacto (opcional)</label>
+                        <input type="hidden" id="p-papa-foto-url">
+                        <div class="photo-box">
+                            <img id="p-papa-foto-preview" src="" alt="Vista previa segundo contacto" class="photo-preview">
+                            <input type="file" id="p-papa-foto-file" accept="image/*">
+                        </div>
+                    </div>
+
+                    <div class="section-heading span-2">4. Contacto de auxilio alternativo (opcional)</div>
+
+                    <div class="field">
+                        <label for="p-aux-nombre">Nombre y vínculo</label>
+                        <input type="text" id="p-aux-nombre" placeholder="Ej: Roberto González (Abuelo)">
+                    </div>
+
+                    <div class="field">
+                        <label for="p-aux-tel">Teléfono</label>
+                        <input type="tel" id="p-aux-tel" placeholder="Ej: +5492604555444">
+                    </div>
+
+                    <div class="section-heading span-2">5. PIN de seguridad (6 caracteres)</div>
+
+                    <div class="field span-2">
+                        <label for="p-pin">PIN de seguridad (1 especial, 1 mayúscula, 1 minúscula y 3 números) *</label>
+                        <input
+                            type="text"
+                            id="p-pin"
+                            minlength="6"
+                            maxlength="6"
+                            pattern="(?=.*[^A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{6}"
+                            title="Debe tener 6 caracteres: 1 especial, 1 mayúscula, 1 minúscula y 3 números (Ej: A@b123)"
+                            required
+                            placeholder="Ej: A@b123"
+                        >
+                    </div>
+
+                    <div id="p-status" class="status-msg span-2"></div>
+
+                    <div class="span-2" style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+                        <button type="submit" class="btn btn-danger" style="flex:2;">Guardar Perfil</button>
+                        <button type="button" class="btn btn-light btn-back-home" style="flex:1;">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- FORMULARIO MASCOTA -->
+        <section id="view-form-mascota" class="view-panel">
+            <div class="card" style="max-width:680px;margin:0 auto;">
+                <div class="form-header">
+                    <h2 style="color:var(--primary);">Registrar Mascota</h2>
+                    <button type="button" class="btn btn-light btn-back-home">⬅ Volver</button>
+                </div>
+
+                <form id="form-mascota" class="form-grid">
+                    <input type="hidden" id="m-id">
+                    <input type="hidden" id="m-foto-url">
+
+                    <div class="section-heading span-2" style="color:var(--primary);">1. Datos de la mascota</div>
+
+                    <div class="field">
+                        <label for="m-nombre">Nombre de la mascota *</label>
+                        <input type="text" id="m-nombre" required placeholder="Ej: Zaiha">
+                    </div>
+
+                    <div class="field">
+                        <label for="m-raza">Especie / Raza *</label>
+                        <input type="text" id="m-raza" required placeholder="Ej: Perro / Gato">
+                    </div>
+
+                    <div class="field">
+                        <label for="m-edad">Edad / Sexo *</label>
+                        <input type="text" id="m-edad" required placeholder="Ej: 3 años / Hembra">
+                    </div>
+
+                    <div class="field">
+                        <label for="m-cuidados">Cuidados / Observaciones *</label>
+                        <input type="text" id="m-cuidados" required placeholder="Ej: Se asusta con ruidos">
+                    </div>
+
+                    <div class="field span-2">
+                        <label for="m-foto-file">Foto de la mascota</label>
+                        <div class="photo-box">
+                            <img id="m-foto-preview" src="" alt="Vista previa" class="photo-preview">
+                            <input type="file" id="m-foto-file" accept="image/*">
+                        </div>
+                    </div>
+
+                    <div class="section-heading span-2" style="color:var(--primary);">2. Datos del responsable</div>
+
+                    <div class="field">
+                        <label for="m-dueno">Nombre del responsable *</label>
+                        <input type="text" id="m-dueno" required placeholder="Ej: Darío Carrizo">
+                    </div>
+
+                    <div class="field">
+                        <label for="m-tel">Teléfono de contacto *</label>
+                        <input type="tel" id="m-tel" required placeholder="Ej: +5492604012070">
+                    </div>
+
+                    <div class="field span-2">
+                        <label for="m-direccion">Dirección / Domicilio *</label>
+                        <input type="text" id="m-direccion" required placeholder="Ej: Pasteur 473, San Rafael">
+                    </div>
+
+                    <div class="section-heading span-2" style="color:var(--primary);">3. PIN de seguridad (6 caracteres)</div>
+
+                    <div class="field span-2">
+                        <label for="m-pin">PIN de seguridad (1 especial, 1 mayúscula, 1 minúscula y 3 números) *</label>
+                        <input
+                            type="text"
+                            id="m-pin"
+                            minlength="6"
+                            maxlength="6"
+                            pattern="(?=.*[^A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{6}"
+                            title="Debe tener 6 caracteres: 1 especial, 1 mayúscula, 1 minúscula y 3 números (Ej: Z#a456)"
+                            required
+                            placeholder="Ej: Z#a456"
+                        >
+                    </div>
+
+                    <div id="m-status" class="status-msg span-2"></div>
+
+                    <div class="span-2" style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+                        <button type="submit" class="btn btn-primary" style="flex:2;">Guardar Mascota</button>
+                        <button type="button" class="btn btn-light btn-back-home" style="flex:1;">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- QR -->
+        <section id="view-qr" class="view-panel">
+            <div class="card qr-card">
+                <div class="field no-print" style="text-align:left;margin-bottom:1rem;">
+                    <label for="select-qr-profile">Seleccionar perfil</label>
+                    <select id="select-qr-profile" style="padding:0.55rem 0.75rem;border:1px solid #cbd5e1;border-radius:10px;"></select>
+                </div>
+
+                <h2>Código QR de Auxilio</h2>
+                <p id="qr-profile-caption" class="hero-text" style="margin-top:0.25rem;"></p>
+
+                <div class="qr-box">
+                    <div id="qr-code-render"></div>
+                    <div id="print-qr-render" style="display:none;"></div>
+                </div>
+
+                <button type="button" id="btn-print-qr" class="btn btn-dark no-print" style="width:100%;">
+                    🖨️ Imprimir Tarjeta / Brazalete
+                </button>
+
+                <div class="waterproof-tip">
+                    <strong>💧 Recomendación de uso:</strong> Recorta el código QR y colócalo en un portador impermeable o resistente al agua (ideal para brazalete o collar de mascota).
+                </div>
+            </div>
+        </section>
+
+        <!-- VISTA AUXILIO -->
+        <section id="view-preview" class="view-panel">
+            <div id="preview-selector-wrap" class="card no-print" style="max-width:560px;margin:0 auto 1rem;padding:0.9rem 1rem;">
+                <div class="field">
+                    <label for="select-preview-profile">Perfil activo</label>
+                    <select id="select-preview-profile" style="padding:0.55rem 0.75rem;border:1px solid #cbd5e1;border-radius:10px;"></select>
+                </div>
+            </div>
+
+            <div class="emergency-sheet" id="emergency-card-container"></div>
+        </section>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = 'https://mpezhcqiwjbbmnpksyou.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_nspbW2ThzB7pVDmBkVKrOw_j7K8n_u1w9Y';
+        const STORAGE_KEY = 'tauxilio_profiles_v1';
+        const DEFAULT_AVATAR = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='%2364748b'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm0 14c-2.03 0-3.8-.85-5.05-2.2.03-1.66 3.33-2.57 5.05-2.57s5.02.91 5.05 2.57C15.8 19.15 14.03 20 12 20z'/></svg>";
+
+        const SAMPLE_PROFILE = {
+            id: 'sample-01',
+            pin: 'A@b123',
+            tipo: 'persona',
+            nombre: 'Mateo',
+            apellido: 'González',
+            edad: '7 años',
+            discapacidad: 'Autismo (TEA - Sensibilidad auditiva)',
+            direccion: 'Calle Principal 456, San Rafael',
+            fotoPortador: DEFAULT_AVATAR,
+            mamaNombre: 'Laura Pérez',
+            mamaTel: '+5492604123456',
+            fotoMama: '',
+            papaNombre: 'Carlos González',
+            papaTel: '+5492604654321',
+            fotoPapa: '',
+            auxNombre: 'Roberto González (Abuelo)',
+            auxTel: '+5492604555444'
+        };
+
+        const supabaseClient = window.supabase
+            ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
+            : null;
+
+        let profiles = [];
+        let activeProfileId = null;
+
+        function isValidPin(pin) {
+            if (!pin || pin.length !== 6) return false;
+            const specials = (pin.match(/[^A-Za-z0-9]/g) || []).length;
+            const upper = (pin.match(/[A-Z]/g) || []).length;
+            const lower = (pin.match(/[a-z]/g) || []).length;
+            const digits = (pin.match(/\d/g) || []).length;
+            return specials >= 1 && upper >= 1 && lower >= 1 && digits >= 3;
+        }
+
+        function readLocal() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                return raw ? JSON.parse(raw) : [];
+            } catch {
+                return [];
+            }
+        }
+
+        function writeLocal(list) {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+            } catch {}
+        }
+
+        function mapDbToProfile(item) {
+            return {
+                id: item.id,
+                pin: item.pin,
+                tipo: item.tipo,
+                nombre: item.nombre,
+                apellido: item.apellido,
+                edad: item.edad,
+                discapacidad: item.discapacidad,
+                direccion: item.direccion,
+                fotoPortador: item.foto_portador || DEFAULT_AVATAR,
+                mamaNombre: item.mama_nombre,
+                mamaTel: item.mama_tel,
+                fotoMama: item.foto_mama || '',
+                papaNombre: item.papa_nombre || '',
+                papaTel: item.papa_tel || '',
+                fotoPapa: item.foto_papa || '',
+                auxNombre: item.aux_nombre || '',
+                auxTel: item.aux_tel || ''
+            };
+        }
+
+        function mapProfileToDb(p) {
+            return {
+                id: p.id,
+                pin: p.pin,
+                tipo: p.tipo,
+                nombre: p.nombre,
+                apellido: p.apellido,
+                edad: p.edad,
+                discapacidad: p.discapacidad,
+                direccion: p.direccion,
+                foto_portador: p.fotoPortador,
+                mama_nombre: p.mamaNombre,
+                mama_tel: p.mamaTel,
+                foto_mama: p.fotoMama || '',
+                papa_nombre: p.papaNombre || '',
+                papa_tel: p.papaTel || '',
+                foto_papa: p.fotoPapa || '',
+                aux_nombre: p.auxNombre || '',
+                aux_tel: p.auxTel || ''
+            };
+        }
+
+        async function loadProfiles() {
+            if (!supabaseClient) return readLocal();
+            try {
+                const { data, error } = await supabaseClient.from('perfil').select('*');
+                if (error) throw error;
+                const mapped = (data || []).map(mapDbToProfile);
+                writeLocal(mapped);
+                return mapped;
+            } catch {
+                return readLocal();
+            }
+        }
+
+        async function saveProfile(profile) {
+            const current = readLocal();
+            const idx = current.findIndex((item) => item.id === profile.id);
+            if (idx >= 0) current[idx] = profile;
+            else current.push(profile);
+            writeLocal(current);
+
+            if (!supabaseClient) return;
+            try {
+                const { error } = await supabaseClient.from('perfil').upsert(mapProfileToDb(profile));
+                if (error) throw error;
+            } catch {}
+        }
+
+        async function uploadPhoto(file, profileId) {
+            if (!supabaseClient) return null;
+            const ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
+            const fileName = `${profileId}_${Date.now()}.${ext}`;
+            const { error } = await supabaseClient.storage.from('fotos').upload(fileName, file, { upsert: true });
+            if (error) return null;
+            const { data } = supabaseClient.storage.from('fotos').getPublicUrl(fileName);
+            return data?.publicUrl || null;
+        }
+
+        function showView(viewId) {
+            document.querySelectorAll('.view-panel').forEach((el) => el.classList.remove('active'));
+            document.getElementById(viewId)?.classList.add('active');
+            document.querySelectorAll('.tab-btn').forEach((btn) => {
+                btn.classList.toggle('active', btn.dataset.target === viewId);
+            });
+        }
+
+        function setEmergencyOnlyMode(enabled) {
+            const header = document.getElementById('top-header');
+            const selectorWrap = document.getElementById('preview-selector-wrap');
+            if (header) header.style.display = enabled ? 'none' : '';
+            if (selectorWrap) selectorWrap.style.display = enabled ? 'none' : '';
+        }
+
+        function setStatus(id, msg, isErr = false) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.textContent = msg;
+            el.style.color = isErr ? '#b91c1c' : '#475569';
+        }
+
+        function fillSelects(list, selectedId) {
+            [document.getElementById('select-qr-profile'), document.getElementById('select-preview-profile')].forEach((sel) => {
+                if (!sel) return;
+                sel.innerHTML = '';
+                list.forEach((p) => {
+                    const opt = document.createElement('option');
+                    opt.value = p.id;
+                    opt.textContent = `${p.nombre} ${p.apellido || ''} (${p.tipo === 'mascota' ? 'Mascota' : 'Persona'})`;
+                    sel.appendChild(opt);
+                });
+                if (selectedId) sel.value = selectedId;
+            });
+        }
+
+        function resetForms() {
+            document.getElementById('form-persona')?.reset();
+            document.getElementById('form-mascota')?.reset();
+            document.getElementById('p-id').value = '';
+            document.getElementById('p-foto-url').value = '';
+            document.getElementById('p-foto-preview').src = DEFAULT_AVATAR;
+            document.getElementById('p-mama-foto-url').value = '';
+            document.getElementById('p-mama-foto-preview').src = DEFAULT_AVATAR;
+            document.getElementById('p-papa-foto-url').value = '';
+            document.getElementById('p-papa-foto-preview').src = DEFAULT_AVATAR;
+            document.getElementById('m-id').value = '';
+            document.getElementById('m-foto-url').value = '';
+            document.getElementById('m-foto-preview').src = DEFAULT_AVATAR;
+            setStatus('p-status', '');
+            setStatus('m-status', '');
+        }
+
+        function renderEmergencyCard(profile) {
+            const container = document.getElementById('emergency-card-container');
+            if (!container) return;
+            if (!profile) {
+                container.innerHTML = '<div style="padding:1.5rem;text-align:center;">Sin perfil disponible.</div>';
+                return;
+            }
+
+            const isPet = profile.tipo === 'mascota';
+
+            const mamaImgHtml = profile.fotoMama
+                ? `<img src="${profile.fotoMama}" alt="${profile.mamaNombre}" class="photo-preview" style="width:52px;height:52px;float:right;margin-left:0.6rem;" onerror="this.style.display='none'">`
+                : '';
+
+            const papaImgHtml = profile.fotoPapa
+                ? `<img src="${profile.fotoPapa}" alt="${profile.papaNombre}" class="photo-preview" style="width:52px;height:52px;float:right;margin-left:0.6rem;" onerror="this.style.display='none'">`
+                : '';
+
+            const papaHtml = !isPet && profile.papaNombre ? `
+                <div class="contact-item papa">
+                    ${papaImgHtml}
+                    <div class="contact-role">Papá / Tutor 2</div>
+                    <div class="contact-name">${profile.papaNombre}</div>
+                    <div class="contact-phone">${profile.papaTel}</div>
+                    <a href="tel:${profile.papaTel}" class="call-btn call-papa">📞 Llamar a Papá</a>
+                </div>` : '';
+
+            const auxHtml = !isPet && profile.auxNombre ? `
+                <div class="contact-item aux">
+                    <div class="contact-role">Contacto Secundario</div>
+                    <div class="contact-name">${profile.auxNombre}</div>
+                    <div class="contact-phone">${profile.auxTel}</div>
+                    <a href="tel:${profile.auxTel}" class="call-btn call-aux">📲 Llamar a Contacto de Auxilio</a>
+                </div>` : '';
+
+            container.innerHTML = `
+                <div class="emergency-banner">
+                    <span class="emergency-tag">${isPet ? 'Auxilio Mascota' : 'Perfil de Auxilio ID'}</span>
+                    <h2>${isPet ? '¡ESTOY PERDIDO!' : '¡NECESITO AYUDA!'}</h2>
+                </div>
+                <div class="emergency-body">
+                    <div class="carrier-box">
+                        <img src="${profile.fotoPortador || DEFAULT_AVATAR}" alt="${profile.nombre}" class="carrier-photo" onerror="this.src='${DEFAULT_AVATAR}'">
+                        <div class="carrier-name">${profile.nombre} ${profile.apellido || ''}</div>
+                        <div class="carrier-meta">${profile.edad || ''}</div>
+                    </div>
+                    <div class="alert-box">
+                        <div class="alert-label">⚠️ ${isPet ? 'Cuidados / Observaciones' : 'Condición / Diagnóstico'}</div>
+                        <div class="alert-value">${profile.discapacidad || 'Sin observaciones'}</div>
+                    </div>
+                    <div class="contact-list">
+                        <div class="contact-item mama">
+                            ${mamaImgHtml}
+                            <div class="contact-role">${isPet ? 'Dueño / Responsable' : 'Mamá / Tutor 1'}</div>
+                            <div class="contact-name">${profile.mamaNombre}</div>
+                            <div class="contact-phone">${profile.mamaTel}</div>
+                            <a href="tel:${profile.mamaTel}" class="call-btn call-mama">📞 Llamar a ${isPet ? 'Responsable' : 'Mamá'}</a>
+                        </div>
+                        ${papaHtml}
+                        ${auxHtml}
+                    </div>
+                    <div class="address-card">
+                        <div class="contact-role">🏠 ${isPet ? 'Domicilio del Responsable' : 'Dirección de Residencia'}</div>
+                        <div class="contact-name" style="font-size:0.92rem;">${profile.direccion}</div>
+                    </div>
+                    <div class="public-services">
+                        <div class="public-services-title">Emergencias Públicas</div>
+                        <div class="public-grid">
+                            <a href="tel:911" class="call-btn" style="background-color:#0284c7;">🚓 Policía (911)</a>
+                            <a href="tel:107" class="call-btn" style="background-color:#16a34a;">🚑 Ambulancia (107)</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderQR(profile) {
+            const target = document.getElementById('qr-code-render');
+            const printTarget = document.getElementById('print-qr-render');
+            if (!target || !profile) return;
+            target.innerHTML = '';
+            if (printTarget) printTarget.innerHTML = '';
+
+            const qrUrl = `${window.location.origin}${window.location.pathname}?id=${encodeURIComponent(profile.id)}`;
+            if (typeof window.QRCode === 'function') {
+                new window.QRCode(target, {
+                    text: qrUrl,
+                    width: 184,
+                    height: 184,
+                    colorDark: '#0f172a',
+                    colorLight: '#ffffff',
+                    correctLevel: window.QRCode.CorrectLevel.H
+                });
+                if (printTarget) {
+                    new window.QRCode(printTarget, {
+                        text: qrUrl,
+                        width: 200,
+                        height: 200,
+                        colorDark: '#0f172a',
+                        colorLight: '#ffffff',
+                        correctLevel: window.QRCode.CorrectLevel.H
+                    });
+                }
+            }
+            const caption = document.getElementById('qr-profile-caption');
+            if (caption) caption.textContent = `${profile.nombre} ${profile.apellido || ''}`.trim();
+        }
+
+        function setActiveProfile(id) {
+            activeProfileId = id;
+            const current = profiles.find((p) => p.id === id) || profiles[0] || null;
+            fillSelects(profiles, current ? current.id : null);
+            renderEmergencyCard(current);
+            renderQR(current);
+        }
+
+        async function handlePhotoInput(event, previewId, hiddenId, statusId) {
+            const file = event.target.files?.[0];
+            if (!file) return;
+            if (file.size > 5 * 1024 * 1024) {
+                setStatus(statusId, 'La imagen debe pesar menos de 5 MB.', true);
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = document.getElementById(previewId);
+                if (img) img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+
+            setStatus(statusId, 'Subiendo foto...');
+            const tempId = document.getElementById('p-id')?.value || document.getElementById('m-id')?.value || `temp_${Date.now()}`;
+            const url = await uploadPhoto(file, tempId);
+            if (url) {
+                document.getElementById(hiddenId).value = url;
+                setStatus(statusId, 'Foto lista.');
+            } else {
+                setStatus(statusId, 'Vista previa cargada (sin enlace de nube).', true);
+            }
+        }
+
+        async function onPersonaSubmit(e) {
+            e.preventDefault();
+            const pin = document.getElementById('p-pin').value.trim();
+            if (!isValidPin(pin)) {
+                setStatus('p-status', 'El PIN debe tener 6 caracteres: 1 especial, 1 mayúscula, 1 minúscula y 3 números (Ej: A@b123).', true);
+                return;
+            }
+            const id = document.getElementById('p-id').value || `id_${Date.now()}`;
+            const profile = {
+                id,
+                pin,
+                tipo: 'persona',
+                nombre: document.getElementById('p-nombre').value.trim(),
+                apellido: document.getElementById('p-apellido').value.trim(),
+                edad: document.getElementById('p-edad').value.trim(),
+                discapacidad: document.getElementById('p-condicion').value.trim(),
+                direccion: document.getElementById('p-direccion').value.trim(),
+                fotoPortador: document.getElementById('p-foto-url').value || DEFAULT_AVATAR,
+                mamaNombre: document.getElementById('p-mama-nombre').value.trim(),
+                mamaTel: document.getElementById('p-mama-tel').value.trim(),
+                fotoMama: document.getElementById('p-mama-foto-url').value || '',
+                papaNombre: document.getElementById('p-papa-nombre').value.trim(),
+                papaTel: document.getElementById('p-papa-tel').value.trim(),
+                fotoPapa: document.getElementById('p-papa-foto-url').value || '',
+                auxNombre: document.getElementById('p-aux-nombre').value.trim(),
+                auxTel: document.getElementById('p-aux-tel').value.trim()
+            };
+            const idx = profiles.findIndex((p) => p.id === id);
+            if (idx >= 0) profiles[idx] = profile;
+            else profiles.push(profile);
+            await saveProfile(profile);
+            setActiveProfile(id);
+            showView('view-qr');
+        }
+
+        async function onMascotaSubmit(e) {
+            e.preventDefault();
+            const pin = document.getElementById('m-pin').value.trim();
+            if (!isValidPin(pin)) {
+                setStatus('m-status', 'El PIN debe tener 6 caracteres: 1 especial, 1 mayúscula, 1 minúscula y 3 números (Ej: Z#a456).', true);
+                return;
+            }
+            const id = document.getElementById('m-id').value || `id_${Date.now()}`;
+            const raza = document.getElementById('m-raza').value.trim();
+            const profile = {
+                id,
+                pin,
+                tipo: 'mascota',
+                nombre: document.getElementById('m-nombre').value.trim(),
+                apellido: raza ? `(${raza})` : '',
+                edad: document.getElementById('m-edad').value.trim(),
+                discapacidad: document.getElementById('m-cuidados').value.trim(),
+                direccion: document.getElementById('m-direccion').value.trim(),
+                fotoPortador: document.getElementById('m-foto-url').value || DEFAULT_AVATAR,
+                mamaNombre: document.getElementById('m-dueno').value.trim(),
+                mamaTel: document.getElementById('m-tel').value.trim(),
+                fotoMama: '',
+                papaNombre: '',
+                papaTel: '',
+                fotoPapa: '',
+                auxNombre: '',
+                auxTel: ''
+            };
+            const idx = profiles.findIndex((p) => p.id === id);
+            if (idx >= 0) profiles[idx] = profile;
+            else profiles.push(profile);
+            await saveProfile(profile);
+            setActiveProfile(id);
+            showView('view-qr');
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            document.querySelectorAll('.tab-btn').forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    const target = btn.dataset.target;
+                    showView(target);
+                    if (target === 'view-qr' || target === 'view-preview') setActiveProfile(activeProfileId);
+                });
+            });
+
+            document.getElementById('brand-home')?.addEventListener('click', () => showView('view-home'));
+            document.getElementById('choose-persona')?.addEventListener('click', () => {
+                resetForms();
+                showView('view-form-persona');
+            });
+            document.getElementById('choose-mascota')?.addEventListener('click', () => {
+                resetForms();
+                showView('view-form-mascota');
+            });
+            document.querySelectorAll('.btn-back-home').forEach((btn) => {
+                btn.addEventListener('click', () => showView('view-home'));
+            });
+
+            document.getElementById('p-foto-file')?.addEventListener('change', (e) => handlePhotoInput(e, 'p-foto-preview', 'p-foto-url', 'p-status'));
+            document.getElementById('p-mama-foto-file')?.addEventListener('change', (e) => handlePhotoInput(e, 'p-mama-foto-preview', 'p-mama-foto-url', 'p-status'));
+            document.getElementById('p-papa-foto-file')?.addEventListener('change', (e) => handlePhotoInput(e, 'p-papa-foto-preview', 'p-papa-foto-url', 'p-status'));
+            document.getElementById('m-foto-file')?.addEventListener('change', (e) => handlePhotoInput(e, 'm-foto-preview', 'm-foto-url', 'm-status'));
+            document.getElementById('form-persona')?.addEventListener('submit', onPersonaSubmit);
+            document.getElementById('form-mascota')?.addEventListener('submit', onMascotaSubmit);
+            document.getElementById('select-qr-profile')?.addEventListener('change', (e) => setActiveProfile(e.target.value));
+            document.getElementById('select-preview-profile')?.addEventListener('change', (e) => setActiveProfile(e.target.value));
+            document.getElementById('btn-print-qr')?.addEventListener('click', () => window.print());
+
+            profiles = await loadProfiles();
+            if (profiles.length === 0) {
+                profiles.push(SAMPLE_PROFILE);
+                await saveProfile(SAMPLE_PROFILE);
+            }
+
+            const sharedId = new URLSearchParams(window.location.search).get('id');
+            if (sharedId) {
+                const found = profiles.find((p) => p.id === sharedId);
+                setActiveProfile(found ? found.id : profiles[0].id);
+                setEmergencyOnlyMode(true);
+                showView('view-preview');
+            } else {
+                setActiveProfile(profiles[0].id);
+                setEmergencyOnlyMode(false);
+                showView('view-home');
+            }
+        });
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js').catch(() => {});
+            });
+        }
+    </script>
+</body>
+</html>
